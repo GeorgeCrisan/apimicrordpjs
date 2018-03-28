@@ -1,6 +1,5 @@
 let express = require('express');
 let path = require('path');
-let sass = require('node-sass-middleware');
 let moment = require('moment');
 let app = express();
 let emptyresponse = {
@@ -8,14 +7,6 @@ let emptyresponse = {
     natural: null
 }
 
-
-app.use(sass({
-    src: __dirname + '/public',
-    dest: path.join(__dirname + '/public'),
-    indentedSyntax: true,
-  
-    debug: true
-}));
 
 
 
