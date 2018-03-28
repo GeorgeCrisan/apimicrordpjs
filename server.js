@@ -14,7 +14,7 @@ app.use(sass({
     dest: path.join(__dirname + '/public'),
     indentedSyntax: true,
   
-    debug: false
+    debug: true
 }));
 
 
@@ -40,16 +40,16 @@ app.get('/:dateQ', (req, res) => {
         if (natural === "Invalid date")
             natural = null;
 
-        res.send({
+        res.send(JSON.stringify({
             unix: unix,
             natural: natural
-        });
+        }));
 
     } else {
 
         if (moment.utc(parameters, 'MMMM D,YYYY').isValid()) {
 
-            console.log('here moth valid');
+            console.log('here format valid');
 
             natural = parameters;
 
@@ -59,7 +59,7 @@ app.get('/:dateQ', (req, res) => {
 
             if (isNaN(natural[natural.length - 1])) {
 
-                console.log('fuck has passed but with unusual exit');
+                console.log('format has passed but with wrong format');
                 unix = null;
                 natural = null;
                 res.send({
@@ -72,20 +72,18 @@ app.get('/:dateQ', (req, res) => {
             }
 
 
-            res.send({
-                unix: unix,
-                natural: natural
-
-            });
+            res.send(JSON.stringify({
+            unix: unix,
+            natural: natural
+        }));
         } else {
 
             unix = null;
             natural = null;
-            res.send({
-                unix: unix,
-                natural: natural
-
-            });
+            res.send(JSON.stringify({
+            unix: unix,
+            natural: natural
+        }));
         }
     }
 
