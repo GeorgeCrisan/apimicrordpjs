@@ -53,11 +53,10 @@ app.get('/:dateQ', (req, res) => {
                 console.log('format has passed but with wrong format');
                 unix = null;
                 natural = null;
-                res.send({
-                    unix: unix,
-                    natural: natural
-    
-                });
+                res.send(JSON.stringify({
+            unix: unix,
+            natural: natural
+        }));
 
                 return false;
             }
